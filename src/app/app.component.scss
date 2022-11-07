@@ -1,0 +1,46 @@
+.wrapper{
+  max-width: 1200px;
+  margin: 0 auto;
+  .center-wrap{
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+  }
+  .flex{
+    display: flex;
+    justify-content: space-around;
+    align-content: center;
+    width: 100%;
+    .card{
+      text-align: center;
+      box-shadow: 0 5px 10px 10px rgba(48, 48, 48, 0.212);
+      padding: 1rem 4rem;
+      background-color: #fff;
+      border-radius: 5px;
+      h5{
+        font-size: 1rem;
+        background: #fff;
+      }
+      h1{
+        font-size: 5rem;
+        background: #fff;
+      }
+      button{
+        width: 100%;
+        margin-bottom: 1rem;
+        border: none !important;
+        padding: .01rem 2rem;
+        font-size: 1.6rem;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.add{
+  background-color: limegreen;
+}
+.minus{
+  background-color: tomato;
+}

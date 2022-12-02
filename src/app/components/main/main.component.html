@@ -1,8 +1,8 @@
 <div class="center-wrap">
   <div class="flex">
-    <div class="card" *ngFor="let item of userAndRecords">
+    <div class="card p-5" *ngFor="let item of userAndRecords">
       <h3 nz-typography>{{ item.user | titlecase }}</h3>
-      <h1 nz-typography>{{ item.count }}</h1>
+      <h1 class="p-5" nz-typography>{{ item.count }}</h1>
       <div>
         <div>
           <button
@@ -22,24 +22,41 @@
   </div>
 </div>
 
-<nz-table #recordsTable [nzData]="logs.records" [nzShowPagination]="false">
+<nz-table
+  #recordsTable
+  [nzData]="logs.records"
+  nzSize="middle"
+  [nzShowPagination]="false"
+>
   <thead>
     <tr>
       <th nzLeft>Name</th>
       <th nzLeft>Time</th>
-      <th nzRight>Action</th>
+      <th nzRight nzAlign="right">Action</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let logs of recordsTable.data">
-      <td nzLeft>{{ logs.user | titlecase }}</td>
-      <td nzLeft>{{ logs.timestamp | date : "dd  MMMM  YYYY" }}</td>
-      <td nzRight [width]="140">
-        <button disabled nz-button (click)="updateRecord(logs.log_id)">
+      <td nzLeft width="20%">{{ logs.user | titlecase }}</td>
+      <td nzLeft width="20%">
+        {{ logs.timestamp | date : "dd  MMMM  YYYY" }}
+      </td>
+      <td nzRight width="20%" nzAlign="right">
+        <button
+          class="mr-3"
+          nz-popover
+          nzPopoverContent="Edit this record"
+          nz-button
+          nzSize="small"
+          (click)="showModal(logs)"
+        >
           <span nz-icon nzType="edit" nzTheme="outline"></span>
         </button>
         <button
           nz-button
+          nzSize="small"
+          nz-popover
+          nzPopoverContent="Delete this record"
           nzDanger
           nz-popconfirm
           nzPopconfirmTitle="Are you sure delete this record?"
@@ -51,11 +68,46 @@
       </td>
     </tr>
   </tbody>
-  <nz-pagination
-    *ngIf="logs.total > 10"
-    class="p-3"
-    [nzPageIndex]="1"
-    [nzTotal]="logs.total"
-    (nzPageIndexChange)="changeLogsPage($event)"
-  ></nz-pagination>
 </nz-table>
+<nz-pagination
+  width="100%"
+  *ngIf="logs.total > 10"
+  class="p-3"
+  [nzPageIndex]="1"
+  [nzTotal]="logs.total"
+  (nzPageIndexChange)="changeLogsPage($event)"
+></nz-pagination>
+
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="Edit Record"
+  (nzOnCancel)="handleCancel()"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <form nz-form [nzLayout]="'inline'" [formGroup]="editRecordForm">
+      <div class="w-full mb-4">
+        <label for="user">User</label>
+        <input nz-input placeholder="User" formControlName="user" />
+      </div>
+      <div class="w-full mb-5">
+        <label for="timestamp">Date</label>
+        <input nz-input placeholder="Date" formControlName="timestamp" />
+        <!-- <nz-date-picker formControlName="timestamp"></nz-date-picker> -->
+      </div>
+
+      <nz-form-item>
+        <nz-form-control>
+          <button
+            nz-button
+            nzType="primary"
+            (click)="updateRecord()"
+            [disabled]="!editRecordForm.valid"
+          >
+            Edit Record
+          </button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>

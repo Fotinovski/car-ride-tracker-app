@@ -32,7 +32,7 @@ export class ApiService {
 
   updateRecord(log_id: string, body: any): Observable<IRecord> {
     return this.http.patch<IRecord>(
-      `${this.url}/api/deleteRecord/${log_id}`,
+      `${this.url}/api/updateRecord/${log_id}`,
       body
     );
   }

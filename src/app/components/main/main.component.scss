@@ -1,0 +1,43 @@
+.center-wrap {
+  display: grid;
+  place-items: center;
+  min-height: 100vh;
+}
+.flex {
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  width: 100%;
+  flex-wrap: wrap;
+  .card {
+    text-align: center;
+    box-shadow: 0 5px 10px 10px rgba(138, 138, 138, 0.082);
+    padding: 2rem 4rem;
+    background-color: #fff;
+    border-radius: 2px 2px 0 0;
+    margin: 5px 0;
+    button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    // h5 {
+    //   font-size: 1rem;
+    //   background: #fff;
+    // }
+    // h1 {
+    //   font-size: 5rem;
+    //   line-height: 1.5;
+    //   margin-bottom: 0;
+    //   background: #fff;
+    // }
+  }
+}
+button {
+  margin-right: 0.5rem;
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

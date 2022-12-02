@@ -1,0 +1,61 @@
+<div class="center-wrap">
+  <div class="flex">
+    <div class="card" *ngFor="let item of userAndRecords">
+      <h3 nz-typography>{{ item.user | titlecase }}</h3>
+      <h1 nz-typography>{{ item.count }}</h1>
+      <div>
+        <div>
+          <button
+            nz-button
+            nzType="primary"
+            nz-popconfirm
+            nzPopconfirmTitle="Are you sure?"
+            nzOkText="Yes"
+            (nzOnConfirm)="addRecord(item.user)"
+          >
+            Add Record
+            <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<nz-table #recordsTable [nzData]="logs.records" [nzShowPagination]="false">
+  <thead>
+    <tr>
+      <th nzLeft>Name</th>
+      <th nzLeft>Time</th>
+      <th nzRight>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let logs of recordsTable.data">
+      <td nzLeft>{{ logs.user | titlecase }}</td>
+      <td nzLeft>{{ logs.timestamp | date : "dd  MMMM  YYYY" }}</td>
+      <td nzRight [width]="140">
+        <button disabled nz-button (click)="updateRecord(logs.log_id)">
+          <span nz-icon nzType="edit" nzTheme="outline"></span>
+        </button>
+        <button
+          nz-button
+          nzDanger
+          nz-popconfirm
+          nzPopconfirmTitle="Are you sure delete this record?"
+          nzOkText="Yes"
+          (nzOnConfirm)="deleteRecord(logs.log_id)"
+        >
+          <span nz-icon nzType="delete" nzTheme="outline"></span>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <nz-pagination
+    *ngIf="logs.total > 10"
+    class="p-3"
+    [nzPageIndex]="1"
+    [nzTotal]="logs.total"
+    (nzPageIndexChange)="changeLogsPage($event)"
+  ></nz-pagination>
+</nz-table>

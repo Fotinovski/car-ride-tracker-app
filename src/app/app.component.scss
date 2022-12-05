@@ -7,3 +7,15 @@
 body {
   background-color: white !important;
 }
+
+.bg-blur {
+  position: fixed;
+  inset: 0;
+  filter: blur(10px) brightness(50%) grayscale(20%);
+  z-index: -1;
+  background-image: url("https://imageio.forbes.com/specials-images/imageserve/5d35eacaf1176b0008974b54/2020-Chevrolet-Corvette-Stingray/0x0.jpg?format=jpg&crop=4560,2565,x790,y784,safe&width=960");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}

@@ -26,11 +26,11 @@ export class ApiService {
       timestamp: Date.now(),
     });
   }
-  deleteRecord(log_id: string): Observable<IRecord> {
+  deleteRecord(log_id: string): Observable<any> {
     return this.http.delete<IRecord>(`${this.url}/api/deleteRecord/${log_id}`);
   }
 
-  updateRecord(log_id: string, body: any): Observable<IRecord> {
+  updateRecord(log_id: string, body: any): Observable<any> {
     return this.http.patch<IRecord>(
       `${this.url}/api/updateRecord/${log_id}`,
       body

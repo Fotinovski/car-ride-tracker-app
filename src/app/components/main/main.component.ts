@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/service/api.service';
-
+import { NzNotificationService } from 'ng-zorro-antd/notification';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -14,7 +14,11 @@ export class MainComponent implements OnInit {
   logTo: number = 10;
   isVisible: boolean = false;
 
-  constructor(private apiService: ApiService, private fb: FormBuilder) {
+  constructor(
+    private apiService: ApiService,
+    private fb: FormBuilder,
+    private notification: NzNotificationService
+  ) {
     this.userAndRecords = [];
   }
 
@@ -26,7 +30,7 @@ export class MainComponent implements OnInit {
   editRecordForm = this.fb.group({
     log_id: [''],
     user: ['', Validators.required],
-    timestamp: ['', Validators.required],
+    timestamp: [null, Validators.required],
   });
 
   getAllUserLogs(): void {
@@ -41,7 +45,6 @@ export class MainComponent implements OnInit {
   }
 
   changeLogsPage(logFrom: number): void {
-    console.log(logFrom);
     this.logFrom = (logFrom - 1) * this.logTo;
     this.apiService
       .getAllLogs(this.logFrom, this.logTo)
@@ -49,24 +52,52 @@ export class MainComponent implements OnInit {
   }
 
   addRecord(name: string): void {
-    this.apiService.addRecord(name).subscribe(() => this.updataState());
+    this.apiService.addRecord(name).subscribe({
+      next: (msg) => {
+        this.updataState(),
+          this.notification.create('success', msg.Success, '', {
+            nzDuration: 5000,
+          });
+      },
+    });
   }
 
   deleteRecord(log_id: string): void {
-    this.apiService.deleteRecord(log_id).subscribe(() => this.updataState());
+    this.apiService.deleteRecord(log_id).subscribe({
+      next: (msg) => {
+        this.updataState(),
+          this.notification.create('success', msg.Success, '', {
+            nzDuration: 5000,
+          });
+      },
+    });
   }
 
   showModal(record: any): void {
     this.isVisible = true;
+    // let date = new Date(this.editRecordForm.value.timestamp).toLocaleDateString(
+    //   'en-us'
+    // );
+
+    // console.log(record, date);
     this.editRecordForm.patchValue(record);
   }
   updateRecord(): void {
+    this.editRecordForm.value.timestamp = new Date(
+      this.editRecordForm.value.timestamp
+    ).getTime();
+
     this.apiService
       .updateRecord(this.editRecordForm.value.log_id, this.editRecordForm.value)
-      .subscribe(() => (this.isVisible = false));
-
-    console.log(this.editRecordForm.value.log_id);
-    this.isVisible = false;
+      .subscribe({
+        next: (msg) => {
+          this.updataState(),
+            this.notification.create('success', msg.Success, '', {
+              nzDuration: 5000,
+            });
+          this.isVisible = false;
+        },
+      });
   }
   handleCancel(): void {
     this.isVisible = false;

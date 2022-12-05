@@ -75,11 +75,8 @@ export class MainComponent implements OnInit {
 
   showModal(record: any): void {
     this.isVisible = true;
-    // let date = new Date(this.editRecordForm.value.timestamp).toLocaleDateString(
-    //   'en-us'
-    // );
 
-    // console.log(record, date);
+    record.timestamp = new Date(record.timestamp);
     this.editRecordForm.patchValue(record);
   }
   updateRecord(): void {

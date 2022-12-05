@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  BACKEND_SERVER_HOST: 'localhost',
+  BACKEND_SERVER_HOST: 'http://localhost:3050',
 };
 
 /*

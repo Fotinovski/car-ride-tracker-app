@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  BACKEND_SERVER_HOST: 'https://car.numsi.cc',
+  BACKEND_SERVER_HOST:"",
 };

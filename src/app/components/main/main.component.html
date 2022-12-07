@@ -51,21 +51,12 @@
         {{ logs.timestamp | date : "dd  MMMM  YYYY" }}
       </td>
       <td nzRight width="20%" nzAlign="right">
-        <button
-          class="mr-3"
-          nz-popover
-          nzPopoverContent="Edit this record"
-          nz-button
-          nzSize="small"
-          (click)="showModal(logs)"
-        >
+        <button class="mr-3" nz-button nzSize="small" (click)="showModal(logs)">
           <span nz-icon nzType="edit" nzTheme="outline"></span>
         </button>
         <button
           nz-button
           nzSize="small"
-          nz-popover
-          nzPopoverContent="Delete this record"
           nzDanger
           nz-popconfirm
           nzPopconfirmTitle="Are you sure delete this record?"

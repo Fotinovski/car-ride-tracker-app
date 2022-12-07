@@ -2,6 +2,11 @@
   display: grid;
   place-items: center;
   min-height: 100vh;
+  @media all and (max-width: 600px) {
+    display: block;
+    min-height: unset;
+    margin-bottom: 25px;
+  }
 }
 .flex {
   display: flex;
@@ -16,10 +21,17 @@
     background-color: rgba(0, 0, 0, 0.712);
     border-radius: 2px 2px 0 0;
     margin: 10px 0;
+    @media all and (max-width: 600px) {
+      width: 100%;
+      padding: 1.5rem 4rem;
+    }
     button {
       display: flex;
       justify-content: center;
       align-items: center;
+      @media all and (max-width: 600px) {
+        width: 100%;
+      }
     }
   }
 }
@@ -34,6 +46,7 @@ button {
 .add-card {
   display: flex;
   align-items: center;
+  justify-content: center;
   position: relative;
   transition: all 1.6s ease;
   h5 {
@@ -43,6 +56,16 @@ button {
     transition: all 0.3s ease;
     transform: translateX(-50%);
     opacity: 0;
+    @media all and (max-width: 600px) {
+      opacity: 1;
+      position: relative;
+      margin-top: 1rem;
+    }
+  }
+  button{
+    @media all and (max-width: 600px) {
+     margin-bottom: 1rem;
+    }
   }
   &:hover {
     h5 {
@@ -56,5 +79,8 @@ button {
   }
   span {
     font-size: 6rem;
+    @media all and (max-width: 600px) {
+      font-size: 2rem;
+    }
   }
 }

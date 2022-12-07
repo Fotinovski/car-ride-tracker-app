@@ -25,28 +25,31 @@ h6 {
   margin: 0 !important;
 }
 
-td:first-child,
-th:first-child {
-  padding: 10px 0 10px 40px !important;
-}
-
-td:last-child,
-th:last-child {
-  padding: 10px 40px 10px 0 !important;
-}
-
-@media all and (max-width: 600px) {
+.record-table {
   td:first-child,
   th:first-child {
-    padding: 10px 0 10px 10px !important;
+    padding: 10px 0 10px 50px !important;
   }
 
   td:last-child,
   th:last-child {
-    padding: 10px 10px 10px 0 !important;
+    padding: 10px 50px 10px 0 !important;
   }
-  .ant-pagination {
-    padding: 10px !important;
+}
+@media all and (max-width: 600px) {
+  .record-table {
+    td:first-child,
+    th:first-child {
+      padding: 10px 0 10px 10px !important;
+    }
+
+    td:last-child,
+    th:last-child {
+      padding: 10px 10px 10px 0 !important;
+    }
+    .ant-pagination {
+      padding: 10px !important;
+    }
   }
 }
 

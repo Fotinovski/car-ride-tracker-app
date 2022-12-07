@@ -13,6 +13,7 @@ export class MainComponent implements OnInit {
   logFrom: number = 0;
   logTo: number = 10;
   isVisible: boolean = false;
+  isAddUserVisible: boolean = false;
 
   constructor(
     private apiService: ApiService,
@@ -31,6 +32,10 @@ export class MainComponent implements OnInit {
     log_id: [''],
     user: ['', Validators.required],
     timestamp: [null, Validators.required],
+  });
+
+  addUserForm = this.fb.group({
+    user: ['', Validators.required],
   });
 
   getAllUserLogs(): void {
@@ -73,6 +78,22 @@ export class MainComponent implements OnInit {
     });
   }
 
+  addUserModalOpen() {
+    this.addUserForm.reset();
+    this.isAddUserVisible = true;
+  }
+  addUser() {
+    this.apiService.addRecord(this.addUserForm.value.user).subscribe({
+      next: (msg) => {
+        this.updataState(),
+          this.notification.create('success', msg.Success, '', {
+            nzDuration: 5000,
+          });
+      },
+    });
+    this.isAddUserVisible = false;
+  }
+
   showModal(record: any): void {
     this.isVisible = true;
 
@@ -98,6 +119,7 @@ export class MainComponent implements OnInit {
   }
   handleCancel(): void {
     this.isVisible = false;
+    this.isAddUserVisible = false;
   }
 
   private updataState(): void {

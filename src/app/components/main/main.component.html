@@ -19,6 +19,14 @@
         </div>
       </div>
     </div>
+    <div class="p-5 add-card card">
+      <div>
+        <button nz-button nzType="link" (click)="addUserModalOpen()">
+          <span nz-icon nzType="plus-circle" nzTheme="outline"></span>
+        </button>
+        <h5>Add User</h5>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -27,6 +35,7 @@
   [nzData]="logs.records"
   nzSize="middle"
   [nzShowPagination]="false"
+  class="record-table"
 >
   <thead>
     <tr>
@@ -108,6 +117,35 @@
             [disabled]="!editRecordForm.valid"
           >
             Edit Record
+          </button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </ng-container>
+</nz-modal>
+
+<nz-modal
+  [(nzVisible)]="isAddUserVisible"
+  nzTitle="Add User"
+  (nzOnCancel)="handleCancel()"
+  [nzFooter]="null"
+>
+  <ng-container *nzModalContent>
+    <form nz-form [nzLayout]="'inline'" [formGroup]="addUserForm">
+      <div class="w-full mb-4">
+        <label for="user">User</label>
+        <input nz-input placeholder="User" formControlName="user" />
+      </div>
+
+      <nz-form-item>
+        <nz-form-control>
+          <button
+            nz-button
+            nzType="primary"
+            (click)="addUser()"
+            [disabled]="!addUserForm.valid"
+          >
+            Add User
           </button>
         </nz-form-control>
       </nz-form-item>

@@ -11,7 +11,6 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   getAllUsersAndCounts(): Observable<IUserAndCount> {
-    console.log(`${environment.BACKEND_SERVER_HOST}/api/getUsersAndCounts`);
     return this.http.get<IUserAndCount>(
       `${environment.BACKEND_SERVER_HOST}/api/getUsersAndCounts`
     );

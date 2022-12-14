@@ -48,7 +48,7 @@
     <tr *ngFor="let logs of recordsTable.data">
       <td nzLeft width="20%">{{ logs.user | titlecase }}</td>
       <td nzLeft width="20%">
-        {{ logs.timestamp | date : "dd  MMMM  YYYY" }}
+        {{ logs.timestamp | date : "EEEE dd  MMMM  YYYY" }}
       </td>
       <td nzRight width="20%" nzAlign="right">
         <button class="mr-3" nz-button nzSize="small" (click)="showModal(logs)">

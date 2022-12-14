@@ -24,11 +24,12 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzNotificationModule } from 'ng-zorro-antd/notification';
+import { HeaderComponent } from './components/header/header.component';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [AppComponent, MainComponent],
+  declarations: [AppComponent, MainComponent, HeaderComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

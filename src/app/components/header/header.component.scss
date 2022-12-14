@@ -1,0 +1,21 @@
+header {
+  background-color: rgba(0, 0, 0, 0.412);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 0 20px;
+  @media all and (max-width: 600px) {
+    display: none;
+  }
+  .logo {
+    display: flex;
+    //justify-content: center;
+    align-items: center;
+    img {
+      width: 50px;
+      margin-right: 10px;
+    }
+  }
+}
